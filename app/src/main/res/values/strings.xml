@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Eho for Android</string>
+    <string name="action_settings">Settings</string>
+    <string name="eho_confirm">恵方計算1回につき5000円いただきます。よろしいですね？</string>
+    <string name="yes">Yes</string>
+    <string name="title_activity_result">ResultActivity</string>
+</resources>
