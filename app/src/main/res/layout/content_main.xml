@@ -12,20 +12,13 @@
     tools:context="com.example.shimataro.eho.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <EditText
+    <NumberPicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
         android:id="@+id/year"
-        android:layout_alignBottom="@+id/button_calc_eho"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView"
-        android:numeric="integer"
-        android:maxLength="4"
-        android:gravity="center_vertical|right" />
+        android:layout_toStartOf="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
