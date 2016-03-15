@@ -1,13 +1,12 @@
 package com.example.shimataro.eho;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -15,10 +14,10 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        final int year = this._getYear();
         this._initActionBar();
+        this._initResultLeading(year);
     }
 
     @Override
@@ -34,8 +33,17 @@ public class ResultActivity extends AppCompatActivity {
     }
 
 
+    private int _getYear() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        return bundle.getInt("year");
+    }
+
     private void _initActionBar() {
-        ActionBar actionbar = this.getSupportActionBar();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionbar = getSupportActionBar();
         if(actionbar == null) {
             return;
         }
@@ -44,4 +52,9 @@ public class ResultActivity extends AppCompatActivity {
         actionbar.setHomeButtonEnabled(true);
     }
 
+    private void _initResultLeading(final int year) {
+        final String text = getString(R.string.eho_result_leading, year);
+        TextView textView = (TextView)findViewById(R.id.textView_eho_leading);
+        textView.setText(text);
+    }
 }

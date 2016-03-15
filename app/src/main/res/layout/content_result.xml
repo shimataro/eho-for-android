@@ -12,4 +12,12 @@
     tools:context="com.example.shimataro.eho.ResultActivity"
     tools:showIn="@layout/activity_result">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView_eho_leading"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="173dp" />
 </RelativeLayout>

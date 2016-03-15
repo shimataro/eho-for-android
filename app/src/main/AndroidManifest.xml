@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".ResultActivity"
-            android:label="@string/title_activity_result"
+            android:label="@string/eho"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
