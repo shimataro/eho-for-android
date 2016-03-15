@@ -5,4 +5,9 @@
     <string name="eho_confirm">恵方計算1回につき5000円いただきます。よろしいですね？</string>
     <string name="yes">Yes</string>
     <string name="eho_result_leading">Eho in %1$d is…</string>
+    <string name="dir_wsw">west-southwest</string>
+    <string name="dir_sse">south-southeast</string>
+    <string name="dir_nnw">north-northwest</string>
+    <string name="dir_ene">east-northeast</string>
+    <string name="unknown">unknown</string>
 </resources>

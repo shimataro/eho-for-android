@@ -10,6 +10,11 @@ import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
 
+    // 恵方
+    private enum EHO {
+        WSW, SSE, NNW, ENE,
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +23,7 @@ public class ResultActivity extends AppCompatActivity {
         final int year = this._getYear();
         this._initActionBar();
         this._initResultLeading(year);
+        this._initResult(year);
     }
 
     @Override
@@ -56,5 +62,49 @@ public class ResultActivity extends AppCompatActivity {
         final String text = getString(R.string.eho_result_leading, year);
         TextView textView = (TextView)findViewById(R.id.textView_eho_leading);
         textView.setText(text);
+    }
+
+    private void _initResult(final int year) {
+        final EHO eho = this._getEho(year);
+        TextView textView = (TextView)findViewById(R.id.textView_eho);
+        textView.setText(this._eho2str(eho));
+    }
+
+
+    /**
+     * 恵方を取得
+     * @param year 年
+     * @return 恵方（のリソースID）
+     */
+    private EHO _getEho(final int year) {
+        final EHO dirs[] = {EHO.WSW, EHO.SSE, EHO.NNW, EHO.SSE, EHO.ENE};
+        return dirs[year % 5];
+    }
+
+    /**
+     * 恵方から文字列を取得
+     * @param eho 恵方
+     * @return 恵方の文字列
+     */
+    private String _eho2str(final EHO eho) {
+        int str_id = R.string.unknown;
+        switch(eho) {
+            case WSW:
+                str_id = R.string.dir_wsw;
+                break;
+
+            case SSE:
+                str_id = R.string.dir_sse;
+                break;
+
+            case NNW:
+                str_id = R.string.dir_nnw;
+                break;
+
+            case ENE:
+                str_id = R.string.dir_ene;
+                break;
+        }
+        return getString(str_id);
     }
 }
