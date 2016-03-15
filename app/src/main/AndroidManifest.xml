@@ -21,7 +21,8 @@
         <activity
             android:name=".ResultActivity"
             android:label="@string/eho"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
