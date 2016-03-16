@@ -6,4 +6,5 @@
     <string name="dir_sse">south-southeast</string>
     <string name="dir_nnw">north-northwest</string>
     <string name="dir_ene">east-northeast</string>
+    <string name="warning_no_magnetic_field">No magnetic filed sensor.</string>
 </resources>

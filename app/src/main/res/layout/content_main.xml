@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/year"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/textView"
         android:layout_toStartOf="@+id/textView" />
 
@@ -26,8 +26,9 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/eho_result_leading"
         android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignBottom="@+id/year"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="76dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,5 +40,21 @@
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView"
         android:textColor="@color/colorEho" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_magnetic_field"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_warning_96dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/warning_no_magnetic_field"
+        android:id="@+id/textView_warning_magnetic_field"
+        android:layout_below="@+id/imageView_magnetic_field"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

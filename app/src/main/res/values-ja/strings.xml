@@ -6,4 +6,5 @@
     <string name="dir_sse">南南東</string>
     <string name="dir_nnw">北北西</string>
     <string name="dir_ene">東北東</string>
+    <string name="warning_no_magnetic_field">地磁気センサーがありません</string>
 </resources>
