@@ -24,18 +24,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="年の恵方を"
+        android:text="@string/eho_result_leading"
         android:id="@+id/textView"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="調べる"
-        android:id="@+id/button_calc_eho"
-        android:layout_centerVertical="true"
+        android:text="@string/unknown"
+        android:id="@+id/textView_eho"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/textView"
         android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:layout_toEndOf="@+id/textView"
+        android:textColor="@color/colorEho" />
 
 </RelativeLayout>

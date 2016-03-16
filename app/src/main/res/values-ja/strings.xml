@@ -1,13 +1,9 @@
 <resources>
     <string name="app_name">恵方くん for Android</string>
-    <string name="action_settings">設定</string>
-    <string name="eho">恵方</string>
-    <string name="eho_confirm">恵方計算1回につき5000円いただきます。よろしいですね？</string>
-    <string name="yes">はい</string>
-    <string name="eho_result_leading">%1$d年の恵方は</string>
+    <string name="eho_result_leading">年の恵方は</string>
+    <string name="unknown">不明</string>
     <string name="dir_wsw">西南西</string>
     <string name="dir_sse">南南東</string>
     <string name="dir_nnw">北北西</string>
     <string name="dir_ene">東北東</string>
-    <string name="unknown">不明</string>
 </resources>
