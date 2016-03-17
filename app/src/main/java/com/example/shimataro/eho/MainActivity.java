@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SurfaceView m_surfaceView = null;
     private Drawable m_drawableCompassBase = null;
     private Drawable m_drawableCompassNeedle = null;
+    private Drawable m_drawableCompassButton = null;
 
     private Eho m_eho = new Eho();
     private double m_orientation = 0;
@@ -108,6 +109,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // 針
         m_drawableCompassNeedle = getDrawable(R.drawable.compass_needle);
         m_drawableCompassNeedle.setBounds(0, 0, m_drawableCompassNeedle.getIntrinsicWidth(), m_drawableCompassNeedle.getIntrinsicHeight());
+
+        // 針を留めるボタン
+        m_drawableCompassButton = getDrawable(R.drawable.compass_button);
+        m_drawableCompassButton.setBounds(0, 0, m_drawableCompassButton.getIntrinsicWidth(), m_drawableCompassButton.getIntrinsicHeight());
 
         // SurfaceViewの初期化
         m_surfaceView.setZOrderOnTop(true);
@@ -231,6 +236,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // コンパスの針を描画
         canvas.rotate(m_eho.getOrientation(), centerX, centerY);
         m_drawableCompassNeedle.draw(canvas);
+
+        // コンパスのボタンを描画
+        m_drawableCompassButton.draw(canvas);
 
         holder.unlockCanvasAndPost(canvas);
     }

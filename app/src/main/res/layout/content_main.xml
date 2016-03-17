@@ -42,19 +42,20 @@
         android:textColor="@color/colorEho" />
 
     <SurfaceView
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
         android:id="@+id/surfaceView_compass"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/textView_warning_magnetic_field"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/warning_no_magnetic_field"
         android:id="@+id/textView_warning_magnetic_field"
-        android:layout_below="@+id/surfaceView_compass"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="83dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 
 </RelativeLayout>
