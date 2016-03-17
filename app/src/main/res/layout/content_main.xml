@@ -41,20 +41,20 @@
         android:layout_toEndOf="@+id/textView"
         android:textColor="@color/colorEho" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView_magnetic_field"
+    <SurfaceView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:id="@+id/surfaceView_compass"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_warning_96dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/warning_no_magnetic_field"
         android:id="@+id/textView_warning_magnetic_field"
-        android:layout_below="@+id/imageView_magnetic_field"
+        android:layout_below="@+id/surfaceView_compass"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
