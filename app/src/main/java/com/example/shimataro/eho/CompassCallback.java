@@ -34,7 +34,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
      */
     public void setOrientationEho(final double orientationEho) {
         m_orientationEho = orientationEho;
-        _doNotify();
+        _threadNotify();
     }
 
     /**
@@ -43,18 +43,15 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
      */
     public void setOrientationCompass(final double orientationCompass) {
         m_orientationCompass = orientationCompass;
-        _doNotify();
+        _threadNotify();
     }
 
 
     @Override
     public void run() {
-        synchronized (this) {
-            m_threadQuit = false;
-        }
         while(!m_threadQuit) {
             _drawCompass();
-            _doWait();
+            _threadWait();
         }
     }
 
@@ -63,8 +60,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
         m_holder = holder;
         _drawCompass();
 
-        m_thread = new Thread(this);
-        m_thread.start();
+        _threadStart();
     }
 
     @Override
@@ -73,11 +69,21 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        synchronized (this) {
-            m_threadQuit = true;
-        }
-        _doNotify();
+        _threadQuit();
+    }
 
+
+    private void _threadStart() {
+        m_threadQuit = false;
+        m_thread = new Thread(this);
+        m_thread.start();
+    }
+
+    private void _threadQuit() {
+        m_threadQuit = true;
+        _threadNotify();
+
+        // 終わるまで待つ
         try {
             m_thread.join();
         }
@@ -86,8 +92,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
         m_thread = null;
     }
 
-
-    synchronized private void _doWait() {
+    synchronized private void _threadWait() {
         try {
             wait();
         }
@@ -95,7 +100,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
         }
     }
 
-    synchronized private void _doNotify() {
+    synchronized private void _threadNotify() {
         notify();
     }
 
