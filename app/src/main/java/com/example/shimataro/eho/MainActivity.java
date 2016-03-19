@@ -1,9 +1,6 @@
 package com.example.shimataro.eho;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.PixelFormat;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -12,7 +9,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.NumberPicker;
@@ -22,14 +18,12 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
-    private TextView m_textViewEho = null;
-    private SurfaceView m_surfaceView = null;
-    private Drawable m_drawableCompassBase = null;
-    private Drawable m_drawableCompassNeedle = null;
-    private Drawable m_drawableCompassButton = null;
-
     private Eho m_eho = new Eho();
-    private double m_orientation = 0;
+
+    private TextView    m_textViewEho = null;
+    private SurfaceView m_surfaceView = null;
+
+    private CompassCallback m_compassCallback = null;
 
     // 方位取得用
     private SensorManager m_sensorManager = null;
@@ -80,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             return;
         }
 
-        m_orientation = _getOrientation(event);
-        _drawCompass(m_surfaceView.getHolder());
+        final double orientation = _getOrientation(event);
+        m_compassCallback.setOrientationCompass(orientation);
     }
 
 
@@ -103,34 +97,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         // 台紙
-        m_drawableCompassBase = getDrawable(R.drawable.compass_base);
-        m_drawableCompassBase.setBounds(0, 0, m_drawableCompassBase.getIntrinsicWidth(), m_drawableCompassBase.getIntrinsicHeight());
+        Drawable drawableCompassBase = getDrawable(R.drawable.compass_base);
+        drawableCompassBase.setBounds(0, 0, drawableCompassBase.getIntrinsicWidth(), drawableCompassBase.getIntrinsicHeight());
 
         // 針
-        m_drawableCompassNeedle = getDrawable(R.drawable.compass_needle);
-        m_drawableCompassNeedle.setBounds(0, 0, m_drawableCompassNeedle.getIntrinsicWidth(), m_drawableCompassNeedle.getIntrinsicHeight());
+        Drawable drawableCompassNeedle = getDrawable(R.drawable.compass_needle);
+        drawableCompassNeedle.setBounds(0, 0, drawableCompassNeedle.getIntrinsicWidth(), drawableCompassNeedle.getIntrinsicHeight());
 
         // 針を留めるボタン
-        m_drawableCompassButton = getDrawable(R.drawable.compass_button);
-        m_drawableCompassButton.setBounds(0, 0, m_drawableCompassButton.getIntrinsicWidth(), m_drawableCompassButton.getIntrinsicHeight());
+        Drawable drawableCompassButton = getDrawable(R.drawable.compass_button);
+        drawableCompassButton.setBounds(0, 0, drawableCompassButton.getIntrinsicWidth(), drawableCompassButton.getIntrinsicHeight());
+
+        m_compassCallback = new CompassCallback(drawableCompassBase, drawableCompassNeedle, drawableCompassButton);
 
         // SurfaceViewの初期化
         m_surfaceView.setZOrderOnTop(true);
         m_surfaceView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
-        m_surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                _drawCompass(holder);
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
-            }
-        });
+        m_surfaceView.getHolder().addCallback(m_compassCallback);
     }
 
     /**
@@ -148,13 +131,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         numberPicker.setValue(year);
 
         // 今年の恵方を表示
-        _showEho(year);
+        _setYear(year);
 
         // 年が変わったら恵方も変える
         numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                _showEho(newVal);
+                _setYear(newVal);
             }
         });
     }
@@ -214,43 +197,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
     /**
-     * コンパスを描画
-     * @param holder センサーのホルダー
-     */
-    private void _drawCompass(SurfaceHolder holder) {
-        Canvas canvas = holder.lockCanvas();
-        if(canvas == null) {
-            return;
-        }
-
-        // 中央座標
-        final int centerX = canvas.getWidth() / 2, centerY = canvas.getHeight() / 2;
-
-        // 全部クリア
-        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-
-        // コンパスの台紙を描画
-        canvas.rotate((float) -m_orientation, centerX, centerY);
-        m_drawableCompassBase.draw(canvas);
-
-        // コンパスの針を描画
-        canvas.rotate(m_eho.getOrientation(), centerX, centerY);
-        m_drawableCompassNeedle.draw(canvas);
-
-        // コンパスのボタンを描画
-        m_drawableCompassButton.draw(canvas);
-
-        holder.unlockCanvasAndPost(canvas);
-    }
-
-    /**
      * 指定年の恵方を表示（文字・コンパス）
      * @param year 恵方を表示する年
      */
-    private void _showEho(final int year) {
+    private void _setYear(final int year) {
         m_eho.setYear(year);
         m_textViewEho.setText(_eho2str(m_eho));
-        _drawCompass(m_surfaceView.getHolder());
+        m_compassCallback.setOrientationEho(m_eho.getOrientation());
     }
 
 
