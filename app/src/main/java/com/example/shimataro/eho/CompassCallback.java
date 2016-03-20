@@ -11,15 +11,17 @@ import android.view.SurfaceHolder;
  * Created by shimataro on 16/03/19.
  */
 public class CompassCallback implements Runnable, SurfaceHolder.Callback {
+    // スレッド関連
     private Thread m_thread = null;
     volatile private boolean m_threadRunning = false;
 
+    // 描画関連
     private SurfaceHolder m_holder = null;
-
-    private Drawable m_drawableCompassBase = null;
+    private Drawable m_drawableCompassBase   = null;
     private Drawable m_drawableCompassNeedle = null;
     private Drawable m_drawableCompassButton = null;
 
+    // 方位関連
     private float m_orientationCompass = 0;
     private float m_orientationEho = 0;
 
@@ -50,12 +52,10 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
     @Override
     public void run() {
-        Log.d("Compass Thread", "Begin");
         while (m_threadRunning) {
             _drawCompass();
             _threadWait();
         }
-        Log.d("Compass Thread", "End");
     }
 
     @Override
@@ -76,12 +76,18 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
     }
 
 
+    /**
+     * スレッドを開始
+     */
     private void _threadStart() {
         m_threadRunning = true;
         m_thread = new Thread(this);
         m_thread.start();
     }
 
+    /**
+     * スレッドを終了
+     */
     private void _threadQuit() {
         m_threadRunning = false;
         _threadNotify();
@@ -96,6 +102,9 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
         m_thread = null;
     }
 
+    /**
+     * スレッドを一時停止
+     */
     synchronized private void _threadWait() {
         try {
             // ここのifがないと、_threadQuit()が先にコールされた場合に永久にストップする
@@ -108,17 +117,18 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
         }
     }
 
+    /**
+     * スレッドを再開
+     */
     synchronized private void _threadNotify() {
         notify();
     }
 
     /**
      * コンパスを描画
-     * @param holder センサーのホルダー
      */
     private void _drawCompass() {
-        SurfaceHolder holder = m_holder;
-        Canvas canvas = holder.lockCanvas();
+        Canvas canvas = m_holder.lockCanvas();
         if (canvas == null) {
             return;
         }
@@ -140,6 +150,6 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
         // コンパスのボタンを描画
         m_drawableCompassButton.draw(canvas);
 
-        holder.unlockCanvasAndPost(canvas);
+        m_holder.unlockCanvasAndPost(canvas);
     }
 }

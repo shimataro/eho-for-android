@@ -162,8 +162,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     /**
      * 方位を取得
-     * @see http://wp.developapp.net/?p=3394
-     * @see http://teru2-bo2.blogspot.jp/2012/06/android.html
+     * http://wp.developapp.net/?p=3394
+     * http://teru2-bo2.blogspot.jp/2012/06/android.html
      * @param event センサーイベント
      * @return 方位
      */
@@ -242,5 +242,4 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
         return getString(str_id);
     }
-
 }
