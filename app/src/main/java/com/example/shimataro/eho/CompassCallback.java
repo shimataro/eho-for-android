@@ -20,8 +20,8 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
     private Drawable m_drawableCompassNeedle = null;
     private Drawable m_drawableCompassButton = null;
 
-    private double m_orientationCompass = 0;
-    private double m_orientationEho = 0;
+    private float m_orientationCompass = 0;
+    private float m_orientationEho = 0;
 
     public CompassCallback(Drawable drawableCompassBase, Drawable drawableCompassNeedle, Drawable drawableCompassButton) {
         m_drawableCompassBase   = drawableCompassBase;
@@ -33,7 +33,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
      * 恵方を設定
      * @param orientationEho
      */
-    public void setOrientationEho(final double orientationEho) {
+    public void setOrientationEho(final float orientationEho) {
         m_orientationEho = orientationEho;
         _threadNotify();
     }
@@ -42,7 +42,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
      * コンパスの方位を設定
      * @param orientationCompass
      */
-    public void setOrientationCompass(final double orientationCompass) {
+    public void setOrientationCompass(final float orientationCompass) {
         m_orientationCompass = orientationCompass;
         _threadNotify();
     }
@@ -51,7 +51,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
     @Override
     public void run() {
         Log.d("Compass Thread", "Begin");
-        while(!m_threadQuit) {
+        while (!m_threadQuit) {
             _drawCompass();
             _threadWait();
         }
@@ -118,7 +118,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
     private void _drawCompass() {
         SurfaceHolder holder = m_holder;
         Canvas canvas = holder.lockCanvas();
-        if(canvas == null) {
+        if (canvas == null) {
             return;
         }
 
@@ -129,11 +129,11 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
 
         // コンパスの台紙を描画
-        canvas.rotate((float) -m_orientationCompass, centerX, centerY);
+        canvas.rotate(-m_orientationCompass, centerX, centerY);
         m_drawableCompassBase.draw(canvas);
 
         // コンパスの針を描画
-        canvas.rotate((float) m_orientationEho, centerX, centerY);
+        canvas.rotate(m_orientationEho, centerX, centerY);
         m_drawableCompassNeedle.draw(canvas);
 
         // コンパスのボタンを描画

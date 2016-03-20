@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // http://teru2-bo2.blogspot.jp/2012/06/android.html
         m_sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        m_textViewEho = (TextView)findViewById(R.id.textView_eho);
-        m_surfaceView = (SurfaceView)findViewById(R.id.surfaceView_compass);
+        m_textViewEho = (TextView) findViewById(R.id.textView_eho);
+        m_surfaceView = (SurfaceView) findViewById(R.id.surfaceView_compass);
         _initActionBar();
         _initCompass();
         _initInputYear();
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             return;
         }
 
-        final double orientation = _getOrientation(event);
+        final float orientation = _getOrientation(event);
         m_compassCallback.setOrientationCompass(orientation);
     }
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      * コンパスを初期化
      */
     private void _initCompass() {
-        if(!_canUseOrientationSensor()) {
+        if (!_canUseOrientationSensor()) {
             // 方位センサーを使えなければ警告メッセージ表示
             findViewById(R.id.textView_warning_magnetic_field).setVisibility(View.VISIBLE);
         }
@@ -149,11 +149,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      * @return OK/NG
      */
     private boolean _canUseOrientationSensor() {
-        if(m_sensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).size() == 0) {
+        if (m_sensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).size() == 0) {
             return false;
         }
 
-        if(m_sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).size() == 0) {
+        if (m_sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER).size() == 0) {
             return false;
         }
 
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      * @param event センサーイベント
      * @return 方位
      */
-    private double _getOrientation(SensorEvent event) {
+    private float _getOrientation(SensorEvent event) {
         switch (event.sensor.getType()) {
             case Sensor.TYPE_MAGNETIC_FIELD: // 地磁気センサー
                 m_valuesMagnetic = event.values.clone();
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         SensorManager.getOrientation(R, orientation);
 
         // 方位を取得する
-        return Math.toDegrees(orientation[0]);
+        return (float) Math.toDegrees(orientation[0]);
     }
 
 
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      */
     private String _eho2str(final Eho eho) {
         int str_id = R.string.unknown;
-        switch(eho.getSymbol()) {
+        switch (eho.getSymbol()) {
             case WSW:
                 str_id = R.string.dir_wsw;
                 break;
