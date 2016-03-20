@@ -98,7 +98,9 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
     synchronized private void _threadWait() {
         try {
-            wait();
+            if (!m_threadQuit) {
+                wait();
+            }
         }
         catch (InterruptedException e) {
             Log.d("InterruptedException", e.getMessage());
