@@ -37,7 +37,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
      */
     public void setOrientationEho(final float orientationEho) {
         m_orientationEho = orientationEho;
-        _threadNotify();
+        _threadNotify(false);
     }
 
     /**
@@ -46,7 +46,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
      */
     public void setOrientationCompass(final float orientationCompass) {
         m_orientationCompass = orientationCompass;
-        _threadNotify();
+        _threadNotify(false);
     }
 
 
@@ -89,8 +89,8 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
      * スレッドを終了
      */
     private void _threadQuit() {
-        m_threadRunning = false;
-        _threadNotify();
+        // 終了通知を送る
+        _threadNotify(true);
 
         // 終わるまで待つ
         try {
@@ -119,8 +119,12 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
     /**
      * スレッドを再開
+     * @param quit 終了させるか？
      */
-    synchronized private void _threadNotify() {
+    synchronized private void _threadNotify(final boolean quit) {
+        if (quit) {
+            m_threadRunning = false;
+        }
         notify();
     }
 
