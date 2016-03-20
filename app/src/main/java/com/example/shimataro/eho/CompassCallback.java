@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 /**
@@ -11,7 +12,7 @@ import android.view.SurfaceHolder;
  */
 public class CompassCallback implements Runnable, SurfaceHolder.Callback {
     private Thread m_thread = null;
-    private boolean m_threadQuit = false;
+    volatile private boolean m_threadQuit = false;
 
     private SurfaceHolder m_holder = null;
 
@@ -49,10 +50,12 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
     @Override
     public void run() {
+        Log.d("Compass Thread", "Begin");
         while(!m_threadQuit) {
             _drawCompass();
             _threadWait();
         }
+        Log.d("Compass Thread", "End");
     }
 
     @Override
@@ -88,6 +91,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
             m_thread.join();
         }
         catch (InterruptedException e) {
+            Log.d("InterruptedException", e.getMessage());
         }
         m_thread = null;
     }
@@ -97,6 +101,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
             wait();
         }
         catch (InterruptedException e) {
+            Log.d("InterruptedException", e.getMessage());
         }
     }
 
