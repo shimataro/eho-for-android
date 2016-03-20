@@ -12,7 +12,7 @@ import android.view.SurfaceHolder;
  */
 public class CompassCallback implements Runnable, SurfaceHolder.Callback {
     private Thread m_thread = null;
-    volatile private boolean m_threadQuit = false;
+    volatile private boolean m_threadRunning = false;
 
     private SurfaceHolder m_holder = null;
 
@@ -51,7 +51,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
     @Override
     public void run() {
         Log.d("Compass Thread", "Begin");
-        while (!m_threadQuit) {
+        while (m_threadRunning) {
             _drawCompass();
             _threadWait();
         }
@@ -77,13 +77,13 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
 
     private void _threadStart() {
-        m_threadQuit = false;
+        m_threadRunning = true;
         m_thread = new Thread(this);
         m_thread.start();
     }
 
     private void _threadQuit() {
-        m_threadQuit = true;
+        m_threadRunning = false;
         _threadNotify();
 
         // 終わるまで待つ
@@ -98,7 +98,8 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
     synchronized private void _threadWait() {
         try {
-            if (!m_threadQuit) {
+            // ここのifがないと、_threadQuit()が先にコールされた場合に永久にストップする
+            if (m_threadRunning) {
                 wait();
             }
         }
