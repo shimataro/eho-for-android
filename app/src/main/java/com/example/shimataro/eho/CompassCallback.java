@@ -19,16 +19,14 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
     private SurfaceHolder m_holder = null;
     private Drawable m_drawableCompassBase   = null;
     private Drawable m_drawableCompassNeedle = null;
-    private Drawable m_drawableCompassButton = null;
 
     // 方位関連
     private float m_orientationCompass = 0;
     private float m_orientationEho = 0;
 
-    public CompassCallback(Drawable drawableCompassBase, Drawable drawableCompassNeedle, Drawable drawableCompassButton) {
+    public CompassCallback(Drawable drawableCompassBase, Drawable drawableCompassNeedle) {
         m_drawableCompassBase   = drawableCompassBase;
         m_drawableCompassNeedle = drawableCompassNeedle;
-        m_drawableCompassButton = drawableCompassButton;
     }
 
     /**
@@ -150,9 +148,6 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
         // コンパスの針を描画
         canvas.rotate(m_orientationEho, centerX, centerY);
         m_drawableCompassNeedle.draw(canvas);
-
-        // コンパスのボタンを描画
-        m_drawableCompassButton.draw(canvas);
 
         m_holder.unlockCanvasAndPost(canvas);
     }

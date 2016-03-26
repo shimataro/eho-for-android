@@ -104,11 +104,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Drawable drawableCompassNeedle = getDrawable(R.drawable.compass_needle);
         drawableCompassNeedle.setBounds(0, 0, drawableCompassNeedle.getIntrinsicWidth(), drawableCompassNeedle.getIntrinsicHeight());
 
-        // 針を留めるボタン
-        Drawable drawableCompassButton = getDrawable(R.drawable.compass_button);
-        drawableCompassButton.setBounds(0, 0, drawableCompassButton.getIntrinsicWidth(), drawableCompassButton.getIntrinsicHeight());
-
-        m_compassCallback = new CompassCallback(drawableCompassBase, drawableCompassNeedle, drawableCompassButton);
+        m_compassCallback = new CompassCallback(drawableCompassBase, drawableCompassNeedle);
 
         // SurfaceViewの初期化
         m_surfaceView.setZOrderOnTop(true);
