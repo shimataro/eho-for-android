@@ -158,8 +158,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     /**
      * 方位を取得
-     * http://wp.developapp.net/?p=3394
-     * http://teru2-bo2.blogspot.jp/2012/06/android.html
+     * @see <a href="http://wp.developapp.net/?p=3394">Androidデバイスの方位を調べる | Linux & Android Dialy</a>
+     * @see <a href="http://teru2-bo2.blogspot.jp/2012/06/android.html">Androidでセンサーを使って方位（方角）を取得する : てるてる坊主</a>
      * @param event センサーイベント
      * @return 方位
      */
