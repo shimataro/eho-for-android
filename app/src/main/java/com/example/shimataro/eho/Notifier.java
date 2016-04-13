@@ -11,6 +11,7 @@ import android.support.v4.app.NotificationCompat;
 import java.util.Calendar;
 
 /**
+ * 通知を受信
  * Created by shimataro on 16/04/13.
  */
 public class Notifier extends BroadcastReceiver {
