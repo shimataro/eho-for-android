@@ -16,7 +16,7 @@ import java.util.Calendar;
  */
 public class AlarmReceiver extends BroadcastReceiver {
     // リクエストコード: 毎日
-    static final int REQCODE_DAILY = 0;
+    public static final int REQCODE_DAILY = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
