@@ -31,7 +31,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
     /**
      * 恵方を設定
-     * @param orientationEho
+     * @param orientationEho 恵方[degree]
      */
     public void setOrientationEho(final float orientationEho) {
         m_orientationEho = orientationEho;
@@ -40,7 +40,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
     /**
      * コンパスの方位を設定
-     * @param orientationCompass
+     * @param orientationCompass 方位[degree]
      */
     public void setOrientationCompass(final float orientationCompass) {
         m_orientationCompass = orientationCompass;

@@ -7,4 +7,7 @@
     <string name="dir_nnw">北北西</string>
     <string name="dir_ene">東北東</string>
     <string name="warning_no_magnetic_field">地磁気センサーがありません</string>
+    <string name="notify_ticker_setsubun">今日は節分です！</string>
+    <string name="notify_content_title_setsubun">恵方くん for Android</string>
+    <string name="notify_content_text_setsubun">本日は節分です。恵方巻きを食べましょう！</string>
 </resources>

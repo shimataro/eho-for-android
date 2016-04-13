@@ -1,5 +1,6 @@
 package com.example.shimataro.eho;
 
+import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
@@ -26,9 +27,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private CompassCallback m_compassCallback = null;
 
     // 方位取得用
-    private SensorManager m_sensorManager = null;
     private float[] m_valuesMagnetic = null;
     private float[] m_valuesAccelerometer = null;
+
+    // サービス
+    private SensorManager m_sensorManager = null;
 
 
     @Override
@@ -36,14 +39,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // http://teru2-bo2.blogspot.jp/2012/06/android.html
         m_sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         m_textViewEho = (TextView) findViewById(R.id.textView_eho);
         m_surfaceView = (SurfaceView) findViewById(R.id.surfaceView_compass);
+
         _initActionBar();
         _initCompass();
         _initInputYear();
+        _initAlarm();
     }
 
     @Override
@@ -93,7 +97,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private void _initCompass() {
         if (!_canUseOrientationSensor()) {
             // 方位センサーを使えなければ警告メッセージ表示
-            findViewById(R.id.textView_warning_magnetic_field).setVisibility(View.VISIBLE);
+            View viewWarning = findViewById(R.id.textView_warning_magnetic_field);
+            viewWarning.setVisibility(View.VISIBLE);
         }
 
         // 台紙
@@ -136,6 +141,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 _setYear(newVal);
             }
         });
+    }
+
+    /**
+     * アラームを設定
+     * @see <a href="http://workpiles.com/2014/01/android-notification-alarmmanager/">指定時間に通知する方法 | Workpiles</a>
+     * @see <a href="https://akira-watson.com/android/alarm-notificationmanager.html">[Android] Alarm をNotificationManager で通知する</a>
+     */
+    private void _initAlarm() {
+//        Context context = getApplicationContext();
+        Context context = this;
+
+        // 毎日9時に起動
+        Scheduler.setScheduleDaily(context, AlarmReceiver.class, 9, 0, 0);
     }
 
 
