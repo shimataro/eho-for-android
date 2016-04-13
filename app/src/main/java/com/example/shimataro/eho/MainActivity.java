@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Context context = this;
 
         // 毎日9時に起動
-        Scheduler.setScheduleDaily(context, Notifier.class, 9, 0, 0);
+        Scheduler.setScheduleDaily(context, AlarmReceiver.class, 9, 0, 0);
     }
 
 

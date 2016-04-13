@@ -27,7 +27,7 @@ public class Scheduler {
         calendarAlarm.set(Calendar.MINUTE, minute);
         calendarAlarm.set(Calendar.SECOND, second);
 
-        _setSchedule(context, cls, Notifier.REQCODE_DAILY, calendarAlarm.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.FLAG_CANCEL_CURRENT);
+        _setSchedule(context, cls, AlarmReceiver.REQCODE_DAILY, calendarAlarm.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
     /**
