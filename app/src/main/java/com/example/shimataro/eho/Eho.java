@@ -4,7 +4,7 @@ package com.example.shimataro.eho;
  * Created by shimataro on 16/03/17.
  */
 public class Eho {
-    enum EHO {
+    public enum EHO {
         WSW, SSE, NNW, ENE,
     }
 
