@@ -7,4 +7,7 @@
     <string name="dir_nnw">north-northwest</string>
     <string name="dir_ene">east-northeast</string>
     <string name="warning_no_magnetic_field">No magnetic filed sensor.</string>
+    <string name="notify_ticker_setsubun">Setsubun is today!</string>
+    <string name="notify_content_title_setsubun">Eho for Android</string>
+    <string name="notify_content_text_setsubun">Setsubun is today! Let\'s eat Ehomaki!</string>
 </resources>
