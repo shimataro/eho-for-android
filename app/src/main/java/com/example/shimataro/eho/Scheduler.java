@@ -13,6 +13,9 @@ import java.util.Calendar;
  */
 public class Scheduler {
 
+    // リクエストコード: 毎日
+    public static final int REQCODE_DAILY = 1;
+
     /**
      * 毎日起動するアラームを設定
      * @param context コンテキスト
@@ -27,7 +30,7 @@ public class Scheduler {
         calendarAlarm.set(Calendar.MINUTE, minute);
         calendarAlarm.set(Calendar.SECOND, second);
 
-        _setSchedule(context, cls, AlarmReceiver.REQCODE_DAILY, calendarAlarm.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.FLAG_UPDATE_CURRENT);
+        _setSchedule(context, cls, REQCODE_DAILY, calendarAlarm.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     /**

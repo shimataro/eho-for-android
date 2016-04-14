@@ -15,8 +15,6 @@ import java.util.Calendar;
  * Created by shimataro on 16/04/13.
  */
 public class AlarmReceiver extends BroadcastReceiver {
-    // リクエストコード: 毎日
-    public static final int REQCODE_DAILY = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -31,7 +29,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Calendar calendar = Calendar.getInstance();
         switch (requestCode) {
-            case REQCODE_DAILY:
+            case Scheduler.REQCODE_DAILY:
                 _handleDaily(calendar, context, sender);
                 break;
         }
