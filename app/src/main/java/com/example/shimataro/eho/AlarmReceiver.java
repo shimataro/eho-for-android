@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -18,6 +19,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d("---- AlarmReceiver ----", "onReceive");
+
         final int requestCode = intent.getIntExtra("requestCode", -1);
 
         // 通知がクリックされた時に発行されるIntentの生成
