@@ -17,6 +17,9 @@ import java.util.Calendar;
  */
 public class AlarmReceiver extends BroadcastReceiver {
 
+    /** 通知ID: 節分 */
+    public final int NID_SETSUBUN = 1;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("---- AlarmReceiver ----", "onReceive");
@@ -75,6 +78,6 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .build();
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(R.string.app_name, notification);
+        manager.notify(NID_SETSUBUN, notification);
     }
 }
