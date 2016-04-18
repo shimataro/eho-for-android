@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -48,11 +49,18 @@ public class Scheduler {
         Intent intent = new Intent(context, cls);
         intent.putExtra("requestCode", requestCode);
 
+        if (_scheduleExists(context, requestCode, intent)) {
+            // スケジュール済み
+            Log.i("---- Scheduler ----", "Schedule exists");
+            return false;
+        }
+
         PendingIntent sender = PendingIntent.getBroadcast(context, requestCode, intent, flags);
 
         // アラームを設定
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager == null) {
+            Log.i("---- Scheduler ----", "AlarmManager not exists");
             return false;
         }
 
@@ -63,6 +71,20 @@ public class Scheduler {
             // 定期的
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeMillis, interval, sender);
         }
+
+        Log.i("---- Scheduler ----", "Schedule set");
         return true;
+    }
+
+    /**
+     * 指定のスケジュールが存在しているか？
+     * @param context コンテキスト
+     * @param requestCode リクエストコード
+     * @param intent インテント
+     * @return Yes/No
+     */
+    static private boolean _scheduleExists(Context context, final int requestCode, Intent intent) {
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_NO_CREATE);
+        return pendingIntent != null;
     }
 }

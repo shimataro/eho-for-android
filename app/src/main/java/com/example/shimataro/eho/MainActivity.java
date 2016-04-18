@@ -149,8 +149,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      * @see <a href="https://akira-watson.com/android/alarm-notificationmanager.html">[Android] Alarm をNotificationManager で通知する</a>
      */
     private void _initAlarm() {
-//        Context context = getApplicationContext();
-        Context context = this;
+        Context context = getApplicationContext();
+//        Context context = this;
 
         // 毎日9時に起動
         Scheduler.setScheduleDaily(context, AlarmReceiver.class, 9, 0, 0);

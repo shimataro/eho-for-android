@@ -95,7 +95,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
             m_thread.join();
         }
         catch (InterruptedException e) {
-            Log.d("InterruptedException", e.getMessage());
+            Log.i("InterruptedException", e.getMessage());
         }
         m_thread = null;
     }
@@ -111,7 +111,7 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
             }
         }
         catch (InterruptedException e) {
-            Log.d("InterruptedException", e.getMessage());
+            Log.i("InterruptedException", e.getMessage());
         }
     }
 

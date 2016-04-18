@@ -22,7 +22,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("---- AlarmReceiver ----", "onReceive");
+        Log.i("---- AlarmReceiver ----", "onReceive");
 
         final int requestCode = intent.getIntExtra("requestCode", -1);
 
@@ -36,6 +36,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         switch (requestCode) {
             case Scheduler.REQCODE_DAILY:
+                Log.i("---- AlarmReceiver ----", "Daily Schedule");
                 _handleDaily(calendar, context, sender);
                 break;
         }

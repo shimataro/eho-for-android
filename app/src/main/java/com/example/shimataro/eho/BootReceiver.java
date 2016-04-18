@@ -16,7 +16,7 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("---- BootReceiver ----", "onReceive");
+        Log.i("---- BootReceiver ----", "onReceive");
 
         // 毎日9時に起動
         Scheduler.setScheduleDaily(context, AlarmReceiver.class, 9, 0, 0);
