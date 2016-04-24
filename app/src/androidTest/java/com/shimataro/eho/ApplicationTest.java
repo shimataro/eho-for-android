@@ -1,4 +1,4 @@
-package com.example.shimataro.eho;
+package com.shimataro.eho;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

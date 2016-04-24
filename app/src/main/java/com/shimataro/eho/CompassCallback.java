@@ -1,4 +1,4 @@
-package com.example.shimataro.eho;
+package com.shimataro.eho;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

@@ -1,4 +1,4 @@
-package com.example.shimataro.eho;
+package com.shimataro.eho;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

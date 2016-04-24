@@ -1,4 +1,4 @@
-package com.example.shimataro.eho;
+package com.shimataro.eho;
 
 import android.content.Context;
 import android.graphics.PixelFormat;

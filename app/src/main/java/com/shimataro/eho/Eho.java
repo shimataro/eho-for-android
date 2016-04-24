@@ -1,4 +1,4 @@
-package com.example.shimataro.eho;
+package com.shimataro.eho;
 
 /**
  * Created by shimataro on 16/03/17.
