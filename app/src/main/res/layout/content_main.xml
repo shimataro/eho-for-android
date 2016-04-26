@@ -39,7 +39,7 @@
         android:layout_alignTop="@+id/textView"
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView"
-        android:textColor="@color/colorEho" />
+        android:textColor="@color/colorAccent" />
 
     <SurfaceView
         android:layout_width="192dp"
