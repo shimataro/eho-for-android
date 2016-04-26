@@ -2,10 +2,10 @@
     <string name="app_name">Eho for Android</string>
     <string name="eho_result_leading">"'s Eho is "</string>
     <string name="unknown">unknown</string>
-    <string name="dir_wsw">west-southwest</string>
-    <string name="dir_sse">south-southeast</string>
-    <string name="dir_nnw">north-northwest</string>
-    <string name="dir_ene">east-northeast</string>
+    <string name="dir_wsw">WSW</string>
+    <string name="dir_sse">SSE</string>
+    <string name="dir_nnw">NNW</string>
+    <string name="dir_ene">ENE</string>
     <string name="warning_no_magnetic_field">No magnetic filed sensor.</string>
     <string name="notify_ticker_setsubun">Setsubun is today!</string>
     <string name="notify_content_title_setsubun">Eho for Android</string>
