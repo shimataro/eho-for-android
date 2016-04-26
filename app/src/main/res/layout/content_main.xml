@@ -13,6 +13,7 @@
     tools:showIn="@layout/activity_main">
 
     <NumberPicker
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/year"
@@ -21,9 +22,9 @@
         android:layout_toStartOf="@+id/textView" />
 
     <TextView
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/eho_result_leading"
         android:id="@+id/textView"
         android:layout_alignBottom="@+id/year"
@@ -31,6 +32,7 @@
         android:layout_marginBottom="76dp" />
 
     <TextView
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/unknown"
@@ -49,6 +51,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/warning_no_magnetic_field"
