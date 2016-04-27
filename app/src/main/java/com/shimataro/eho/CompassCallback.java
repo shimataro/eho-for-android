@@ -1,5 +1,6 @@
 package com.shimataro.eho;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -17,16 +18,17 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
     // 描画関連
     private SurfaceHolder m_holder = null;
-    private Drawable m_drawableCompassBase   = null;
-    private Drawable m_drawableCompassNeedle = null;
+    private Bitmap m_bitmapCompassBase   = null;
+    private Bitmap m_bitmapCompassNeedle = null;
 
     // 方位関連
     private float m_orientationCompass = 0;
     private float m_orientationEho = 0;
 
     public CompassCallback(Drawable drawableCompassBase, Drawable drawableCompassNeedle) {
-        m_drawableCompassBase   = drawableCompassBase;
-        m_drawableCompassNeedle = drawableCompassNeedle;
+        // VectorDrawableを直接描画すると高精細ディスプレイでは描画時に毎回拡大処理が走ってモザイクっぽくなることがあるので、一旦ビットマップに変換する
+        m_bitmapCompassBase   = Drawable2Bitmap(drawableCompassBase);
+        m_bitmapCompassNeedle = Drawable2Bitmap(drawableCompassNeedle);
     }
 
     /**
@@ -143,12 +145,26 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
 
         // コンパスの台紙を描画
         canvas.rotate(-m_orientationCompass, centerX, centerY);
-        m_drawableCompassBase.draw(canvas);
+        canvas.drawBitmap(m_bitmapCompassBase, 0, 0, null);
 
         // コンパスの針を描画
         canvas.rotate(m_orientationEho, centerX, centerY);
-        m_drawableCompassNeedle.draw(canvas);
+        canvas.drawBitmap(m_bitmapCompassNeedle, 0, 0, null);
 
         m_holder.unlockCanvasAndPost(canvas);
+    }
+
+
+    /**
+     * Drawableオブジェクトをビットマップに変換
+     * @param drawable 変換元Drawable
+     * @return ビットマップ
+     */
+    private static Bitmap Drawable2Bitmap(Drawable drawable) {
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 }
