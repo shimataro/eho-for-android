@@ -101,14 +101,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             viewWarning.setVisibility(View.VISIBLE);
         }
 
-        // 台紙
-        Drawable drawableCompassBase = getDrawable(R.drawable.compass_base);
-        drawableCompassBase.setBounds(0, 0, drawableCompassBase.getIntrinsicWidth(), drawableCompassBase.getIntrinsicHeight());
-
-        // 針
+        // コンパス描画の初期化
+        Drawable drawableCompassBase   = getDrawable(R.drawable.compass_base  );
         Drawable drawableCompassNeedle = getDrawable(R.drawable.compass_needle);
-        drawableCompassNeedle.setBounds(0, 0, drawableCompassNeedle.getIntrinsicWidth(), drawableCompassNeedle.getIntrinsicHeight());
-
         m_compassCallback = new CompassCallback(drawableCompassBase, drawableCompassNeedle);
 
         // SurfaceViewの初期化

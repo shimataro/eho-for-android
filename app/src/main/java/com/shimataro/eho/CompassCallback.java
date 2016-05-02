@@ -161,10 +161,16 @@ public class CompassCallback implements Runnable, SurfaceHolder.Callback {
      * @return ビットマップ
      */
     private static Bitmap Drawable2Bitmap(Drawable drawable) {
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        // キャンバスにビットマップを割り当て
+        final int width  = drawable.getIntrinsicWidth ();
+        final int height = drawable.getIntrinsicHeight();
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
+
+        // Drawableオブジェクトをキャンバスに描画
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
+
         return bitmap;
     }
 }
