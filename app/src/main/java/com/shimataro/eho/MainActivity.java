@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
+/**
+ * メインアクティビティー
+ */
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private Eho m_eho = new Eho();

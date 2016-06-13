@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 /**
+ * コンパス描画用コールバッククラス
  * Created by shimataro on 16/03/19.
  */
 public class CompassCallback implements Runnable, SurfaceHolder.Callback {

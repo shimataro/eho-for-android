@@ -1,6 +1,7 @@
 package com.shimataro.eho;
 
 /**
+ * 恵方ライブラリ
  * Created by shimataro on 16/03/17.
  */
 public class Eho {
