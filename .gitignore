@@ -1,9 +1,7 @@
-*.iml
 .gradle
 /local.properties
-.idea/workspace.xml
-.idea/libraries
-.idea/inspectionProfiles/
+/.idea/workspace.xml
+/.idea/inspectionProfiles/
 
 .DS_Store
 Thumbs.db
@@ -14,6 +12,6 @@ Thumbs.db
 
 /build
 /captures
-app/app-release.apk
-app/src/androidTest/java/com/example/
-app/src/test/java/com/example/
+/app/app-release.apk
+/app/src/androidTest/java/com/example/
+/app/src/test/java/com/example/
